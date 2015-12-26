@@ -61,7 +61,7 @@
         <!--新建联系人-->
         <scene sceneID="orH-WY-wdb">
             <objects>
-                <tableViewController id="z9E-Nk-aij" sceneMemberID="viewController">
+                <tableViewController id="z9E-Nk-aij" customClass="MLPersonViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="azT-84-if6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,8 +185,18 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="新建联系人" id="vNj-tx-aMG">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="WbJ-ZI-ynV"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="WbJ-ZI-ynV">
+                            <connections>
+                                <action selector="newCompany:" destination="z9E-Nk-aij" id="Tjp-1O-cwU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ageText" destination="dnt-gz-Njz" id="YK0-YK-tgk"/>
+                        <outlet property="corperationText" destination="Mg1-Dw-MM4" id="qpk-pQ-SI5"/>
+                        <outlet property="nameText" destination="j7S-xg-dDx" id="tWi-vu-932"/>
+                        <outlet property="phoneText" destination="zbu-6e-IY9" id="iLw-3S-vHk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSn-Z8-33s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

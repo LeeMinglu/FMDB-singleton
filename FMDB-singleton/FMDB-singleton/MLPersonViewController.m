@@ -7,92 +7,135 @@
 //
 
 #import "MLPersonViewController.h"
+#import "MLDBTools.h"
 
-@interface MLPersonViewController ()
+@interface MLPersonViewController ()<UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *nameText;
+@property (weak, nonatomic) IBOutlet UITextField *phoneText;
+@property (weak, nonatomic) IBOutlet UITextField *ageText;
+@property (weak, nonatomic) IBOutlet UITextField *corperationText;
+
+@property (nonatomic, strong) UIPickerView *pickerView;
+@property (nonatomic, strong) NSArray *companyes;
 
 @end
 
 @implementation MLPersonViewController
 
+- (UIPickerView *)pickerView {
+    if (!_pickerView) {
+        _pickerView = [[UIPickerView alloc] init];
+        
+        _pickerView.delegate = self;
+        _pickerView.dataSource = self;
+    }
+    return _pickerView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.corperationText.inputView = self.pickerView;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//    [self loadCompanies];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+//加载公司数据
+- (void)loadCompanies {
+    //从数据库加载
+    [[MLDBTools sharedDBTools].queue inDatabase:^(FMDatabase *db) {
+        //查询所有公司的数据
+        FMResultSet *set = [db executeQuery:@"SELECT companyName FROM t_company"];
+        
+        //遍历查询结果
+        NSMutableArray *arrayM = [NSMutableArray array];
+        
+        while ([set next]) {
+            //从结果中取出公司的名称
+            NSString *companyName = [set stringForColumn:@"companyName"];
+            
+            [arrayM addObject:companyName];
+        }
+        
+        self.companyes = arrayM;
+        
+        // 让pickerView更新数据
+        [self.pickerView reloadAllComponents];
+    }];
     
-    // Configure the cell...
+}
+
+//新建公司记录
+- (IBAction)newCompany:(UIBarButtonItem *)sender {
     
-    return cell;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请输入公司名称" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    [alertView show];
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark alertView的代理方法
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"点击了%zd", buttonIndex);
+    
+    //0:取消按钮，1: 点击了确定按钮
+    if (buttonIndex == 0) return;
+    
+    UITextField *textField = [alertView textFieldAtIndex:0];
+    
+    if (textField.text.length == 0) {
+        return;
+    }
+    
+    //保存公司数据
+    [[MLDBTools sharedDBTools].queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"INSERT INTO T_Company(companyName) VALUES (?)", textField.text];
+        
+        NSLog(@"保存成功");
+        
+        // 重新加载公司数据
+        // 查询所有的公司数据
+        FMResultSet *rs = [db executeQuery:@"select companyName from t_company"];
+        
+        // 遍历查询结果
+        NSMutableArray *arrayM = [NSMutableArray array];
+        while ([rs next]) {
+            // 从结果中取出公司名称，提示，取查询结果最好用列名，不要用列数
+            NSString *companyName = [rs stringForColumn:@"companyName"];
+            
+            [arrayM addObject:companyName];
+        }
+        
+        // 给数组设置数值
+        self.companyes = arrayM;
+        
+        // 让pickerView更新数据
+        [self.pickerView reloadAllComponents];
+        
+    }];
+
+
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+#pragma mark 实现pickerView的协议及数据源方法
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.companyes.count;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return self.companyes[row];
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.corperationText.text = self.companyes[row];
 }
-*/
+
+
 
 @end

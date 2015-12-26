@@ -89,9 +89,9 @@
 				1A58D7531C2E354C00174B37 /* AppDelegate.m */,
 				1A58D7551C2E354C00174B37 /* ViewController.h */,
 				1A58D7561C2E354C00174B37 /* ViewController.m */,
-				1AE806CC1C2E417B00EBBE24 /* MLDBTools.h */,
 				1AE806CF1C2E4CD800EBBE24 /* MLPersonViewController.h */,
 				1AE806D01C2E4CD800EBBE24 /* MLPersonViewController.m */,
+				1AE806CC1C2E417B00EBBE24 /* MLDBTools.h */,
 				1AE806CD1C2E417B00EBBE24 /* MLDBTools.m */,
 				1A58D7581C2E354C00174B37 /* Main.storyboard */,
 				1A58D75B1C2E354C00174B37 /* Assets.xcassets */,
@@ -319,6 +319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "FMDB-singleton/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SocererGroup.FMDB-singleton";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -330,6 +331,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "FMDB-singleton/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SocererGroup.FMDB-singleton";
 				PRODUCT_NAME = "$(TARGET_NAME)";
