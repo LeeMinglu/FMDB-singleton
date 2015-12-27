@@ -37,7 +37,7 @@
     
     self.corperationText.inputView = self.pickerView;
     
-//    [self loadCompanies];
+    [self loadCompanies];
 }
 
 //加载公司数据
@@ -45,16 +45,23 @@
     //从数据库加载
     [[MLDBTools sharedDBTools].queue inDatabase:^(FMDatabase *db) {
         //查询所有公司的数据
-        FMResultSet *set = [db executeQuery:@"SELECT companyName FROM t_company"];
+        FMResultSet *set = [db executeQuery:@"SELECT companyId,companyName FROM t_company"];
         
         //遍历查询结果
         NSMutableArray *arrayM = [NSMutableArray array];
         
         while ([set next]) {
             //从结果中取出公司的名称
+            NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+            
+            NSInteger companyId = [set intForColumn:@"companyId"];
             NSString *companyName = [set stringForColumn:@"companyName"];
             
-            [arrayM addObject:companyName];
+            [dictM setObject:@(companyId) forKey:@"companyId"];
+            [dictM setObject:companyName forKey:@"companyName"];
+            
+            
+            [arrayM addObject:dictM];
         }
         
         self.companyes = arrayM;
@@ -102,9 +109,17 @@
         NSMutableArray *arrayM = [NSMutableArray array];
         while ([rs next]) {
             // 从结果中取出公司名称，提示，取查询结果最好用列名，不要用列数
+            
+            NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+            
+            NSInteger companyId = [rs intForColumn:@"companyId"];
+            
             NSString *companyName = [rs stringForColumn:@"companyName"];
             
-            [arrayM addObject:companyName];
+            [dictM setObject:@(companyId) forKey:@"companyId"];
+            [dictM setObject:companyName forKey:@"companyName"];
+            
+            [arrayM addObject:dictM];
         }
         
         // 给数组设置数值
@@ -118,6 +133,27 @@
 
 }
 
+//保存个人记录
+- (IBAction)savePerson:(UIButton *)sender {
+    
+    /*@"INSERT INTO T_Person (personName, age, phoneNo, companyId) VALUES (?, ?, ?, ?)", self.nameText.text, self.ageText.text, self.phoneText.text, companyNum */
+    NSInteger companyId = self.corperationText.tag;
+    NSNumber *companyNum = nil;
+    
+    if (companyId > 0) {
+        companyNum = @(companyId);
+    }
+    
+    [[MLDBTools sharedDBTools].queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"INSERT INTO T_Person (personName, age, phoneNo, companyId) VALUES (?, ?, ?, ?)",self.nameText.text, self.ageText.text, self.phoneText.text, companyNum];
+    }];
+    
+    NSLog(@"保存个人数据成功");
+    
+}
+
+
+
 #pragma mark 实现pickerView的协议及数据源方法
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
@@ -129,12 +165,14 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return self.companyes[row];
+    return self.companyes[row][@"companyName"];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.corperationText.text = self.companyes[row];
+    self.corperationText.text = self.companyes[row][@"companyName"];
 }
+
+
 
 
 

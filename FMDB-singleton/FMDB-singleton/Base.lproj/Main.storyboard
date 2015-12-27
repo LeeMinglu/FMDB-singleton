@@ -167,6 +167,9 @@
                                                         <constraint firstAttribute="width" constant="88" id="laT-PL-uIZ"/>
                                                     </constraints>
                                                     <state key="normal" title="保存"/>
+                                                    <connections>
+                                                        <action selector="savePerson:" destination="z9E-Nk-aij" eventType="touchUpInside" id="jpZ-kV-R5I"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
