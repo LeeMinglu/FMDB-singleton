@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1A58D7511C2E354C00174B37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A58D7501C2E354C00174B37 /* main.m */; };
 		1A58D7541C2E354C00174B37 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A58D7531C2E354C00174B37 /* AppDelegate.m */; };
-		1A58D7571C2E354C00174B37 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A58D7561C2E354C00174B37 /* ViewController.m */; };
 		1A58D75A1C2E354C00174B37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A58D7581C2E354C00174B37 /* Main.storyboard */; };
 		1A58D75C1C2E354C00174B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A58D75B1C2E354C00174B37 /* Assets.xcassets */; };
 		1A58D75F1C2E354C00174B37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A58D75D1C2E354C00174B37 /* LaunchScreen.storyboard */; };
@@ -19,6 +18,7 @@
 		1A58D7751C2E357200174B37 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A58D76E1C2E357200174B37 /* FMDatabaseQueue.m */; };
 		1A58D7761C2E357200174B37 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A58D7711C2E357200174B37 /* FMResultSet.m */; };
 		1A58D7781C2E3C7F00174B37 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A58D7771C2E3C7F00174B37 /* libsqlite3.tbd */; };
+		1AC648F61C2F98800045ABEB /* MLPersonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC648F51C2F98800045ABEB /* MLPersonListViewController.m */; };
 		1AE806CE1C2E417B00EBBE24 /* MLDBTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE806CD1C2E417B00EBBE24 /* MLDBTools.m */; };
 		1AE806D11C2E4CD800EBBE24 /* MLPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE806D01C2E4CD800EBBE24 /* MLPersonViewController.m */; };
 /* End PBXBuildFile section */
@@ -28,8 +28,6 @@
 		1A58D7501C2E354C00174B37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1A58D7521C2E354C00174B37 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1A58D7531C2E354C00174B37 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1A58D7551C2E354C00174B37 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1A58D7561C2E354C00174B37 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1A58D7591C2E354C00174B37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A58D75B1C2E354C00174B37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A58D75E1C2E354C00174B37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -46,6 +44,8 @@
 		1A58D7701C2E357200174B37 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		1A58D7711C2E357200174B37 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		1A58D7771C2E3C7F00174B37 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		1AC648F41C2F98800045ABEB /* MLPersonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPersonListViewController.h; sourceTree = "<group>"; };
+		1AC648F51C2F98800045ABEB /* MLPersonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPersonListViewController.m; sourceTree = "<group>"; };
 		1AE806CC1C2E417B00EBBE24 /* MLDBTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLDBTools.h; sourceTree = "<group>"; };
 		1AE806CD1C2E417B00EBBE24 /* MLDBTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLDBTools.m; sourceTree = "<group>"; };
 		1AE806CF1C2E4CD800EBBE24 /* MLPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPersonViewController.h; sourceTree = "<group>"; };
@@ -87,8 +87,8 @@
 				1A58D7661C2E357200174B37 /* fmdb */,
 				1A58D7521C2E354C00174B37 /* AppDelegate.h */,
 				1A58D7531C2E354C00174B37 /* AppDelegate.m */,
-				1A58D7551C2E354C00174B37 /* ViewController.h */,
-				1A58D7561C2E354C00174B37 /* ViewController.m */,
+				1AC648F41C2F98800045ABEB /* MLPersonListViewController.h */,
+				1AC648F51C2F98800045ABEB /* MLPersonListViewController.m */,
 				1AE806CF1C2E4CD800EBBE24 /* MLPersonViewController.h */,
 				1AE806D01C2E4CD800EBBE24 /* MLPersonViewController.m */,
 				1AE806CC1C2E417B00EBBE24 /* MLDBTools.h */,
@@ -199,13 +199,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A58D7571C2E354C00174B37 /* ViewController.m in Sources */,
 				1A58D7741C2E357200174B37 /* FMDatabasePool.m in Sources */,
 				1AE806D11C2E4CD800EBBE24 /* MLPersonViewController.m in Sources */,
 				1A58D7541C2E354C00174B37 /* AppDelegate.m in Sources */,
 				1A58D7751C2E357200174B37 /* FMDatabaseQueue.m in Sources */,
 				1A58D7511C2E354C00174B37 /* main.m in Sources */,
 				1AE806CE1C2E417B00EBBE24 /* MLDBTools.m in Sources */,
+				1AC648F61C2F98800045ABEB /* MLPersonListViewController.m in Sources */,
 				1A58D7721C2E357200174B37 /* FMDatabase.m in Sources */,
 				1A58D7761C2E357200174B37 /* FMResultSet.m in Sources */,
 				1A58D7731C2E357200174B37 /* FMDatabaseAdditions.m in Sources */,

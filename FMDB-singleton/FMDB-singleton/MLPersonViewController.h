@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol  MLPersonViewControllerDelegate <NSObject>
+
+- (void)personViewControllerDidClickSaveData;
+
+@end
+
 @interface MLPersonViewController : UITableViewController
+
+@property (nonatomic, weak) id<MLPersonViewControllerDelegate> delegate;
 
 @end

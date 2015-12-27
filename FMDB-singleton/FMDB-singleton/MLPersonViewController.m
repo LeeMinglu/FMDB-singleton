@@ -150,6 +150,14 @@
     
     NSLog(@"保存个人数据成功");
     
+    if ([self.delegate respondsToSelector:@selector(personViewControllerDidClickSaveData)]) {
+        [self.delegate personViewControllerDidClickSaveData];
+        
+    }
+    
+    //返回上级控制器
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 
@@ -169,6 +177,10 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    // 记录选中的companyId
+    self.corperationText.tag = [self.companyes[row][@"companyId"] intValue];
+
     self.corperationText.text = self.companyes[row][@"companyName"];
 }
 
